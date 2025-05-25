@@ -1,6 +1,4 @@
-# RDBMS - PostgreSQL
-
-## Answering Question of Assignment 2
+# PostgreSQL Questions & Answers
 
 ### 1. What is PostgreSQL?
 
