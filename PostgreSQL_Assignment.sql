@@ -7,3 +7,8 @@ CREATE TABLE rangers (
     name VARCHAR(50) NOT NULL,
     region VARCHAR (100) NOT NULL
 );
+
+INSERT INTO rangers (name, region) VALUES
+('Alice Green', 'Northern Hills'), 
+('Bob White', 'River Delta'), 
+('Carol King', 'Mountain Range');
