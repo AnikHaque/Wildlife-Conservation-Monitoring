@@ -45,5 +45,8 @@ INSERT INTO sightings (species_id, ranger_id, location, sighting_time, notes) VA
 (3, 3, 'Bamboo Grove East', '2024-05-15 09:10:00', 'Feeding observed'),
 (1, 2, 'Snowfall Pass', '2024-05-18 18:30:00', NULL);
 
---  1️⃣ Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
+--  1. Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
 INSERT INTO rangers (name, region) VALUES('Derek Fox', 'Coastal Plains')
+
+--  2.  Count unique species ever sighted.
+SELECT  count(DISTINCT species_id) FROM sightings;
