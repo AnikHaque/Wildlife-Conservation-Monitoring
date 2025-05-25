@@ -26,3 +26,15 @@ INSERT INTO species (common_name, scientific_name, discovery_date, conservation_
 ('Bengal Tiger', 'Panthera tigris tigris', '1758-01-01', 'Endangered'),
 ('Red Panda', 'Ailurus fulgens', '1825-01-01', 'Vulnerable'),
 ('Asiatic Elephant', 'Elephas maximus indicus', '1758-01-01', 'Endangered');
+
+CREATE TABLE sightings(
+    sighting_id SERIAL PRIMARY KEY,
+    ranger_id INT NOT NULL,
+    species_id INT NOT NULL,
+    sighting_time TIMESTAMP NOT NULL,
+    location VARCHAR (200) NOT NULL,
+    notes TEXT,
+
+    Foreign Key (ranger_id) REFERENCES rangers(ranger_id),
+    Foreign Key (species_id) REFERENCES species(species_id)
+);
