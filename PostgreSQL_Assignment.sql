@@ -1,1 +1,3 @@
 -- Active: 1747575604060@@127.0.0.1@5432@assignment_2
+
+CREATE DATABASE assignment_2;
