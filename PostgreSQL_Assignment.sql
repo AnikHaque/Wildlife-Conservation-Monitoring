@@ -43,27 +43,27 @@ INSERT INTO sightings (species_id, ranger_id, location, sighting_time, notes) VA
 (3, 3, 'Bamboo Grove East', '2024-05-15 09:10:00', 'Feeding observed'),
 (1, 2, 'Snowfall Pass', '2024-05-18 18:30:00', NULL);
 
---  1. 
+--  1. Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
 INSERT INTO rangers (name, region) VALUES('Derek Fox', 'Coastal Plains')
 
---  2.  
+--  2.  Count unique species ever sighted.
 SELECT  count(DISTINCT species_id) FROM sightings;
 
--- 3. 
+-- 3. Find all sightings where the location includes "Pass".
 SELECT * FROM sightings WHERE location ILIKE '%Pass%'
 
 
--- 4. 
+-- 4. List each ranger's name and their total number of sightings.
 SELECT name, count(*) FROM sightings s
     INNER JOIN rangers r on s.ranger_id = r.ranger_id
         GROUP BY name
 
--- 5. 
+-- 5. List species that have never been sighted.
 SELECT common_name FROM sightings 
     RIGHT JOIN species ON sightings.species_id = species.species_id
         WHERE sightings.sighting_id IS NULL;
 
--- 6. 
+-- 6. Show the most recent 2 sightings.
 SELECT common_name, sighting_time, name FROM sightings 
     JOIN species ON sightings.species_id = species.species_id
         JOIN rangers ON sightings.ranger_id = rangers.ranger_id
@@ -71,12 +71,17 @@ SELECT common_name, sighting_time, name FROM sightings
                 LIMIT 2;
 
 
--- 7. 
+-- 7. Update all species discovered before year 1800 to have status 'Historic'.
 UPDATE  species set conservation_status ='Historic' WHERE  extract(year FROM discovery_date) < 1800;
 
 
+/*
+8. Label each sighting's time of day as 'Morning', 'Afternoon', or 'Evening'.
 
--- 8. 
+Morning: before 12 PM
+Afternoon: 12 PM–5 PM
+Evening: after 5 PM
+*/
 SELECT 
   sighting_id,
   CASE 
@@ -87,7 +92,7 @@ SELECT
 FROM sightings;
 
 
--- 9. 
+-- 9. Delete rangers who have never sighted any species
 DELETE FROM rangers 
     WHERE ranger_id not in (
             SELECT DISTINCT ranger_id FROM sightings 
